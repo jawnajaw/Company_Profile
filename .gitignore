@@ -1,0 +1,25 @@
+# Koneksi Database
+includes/db_connect.php
+
+# File Database (jika berisi data sensitif/real, jika hanya struktur tidak apa-apa diupload)
+# database.sql
+
+# Folder Upload Gambar/File Dinamis dari Admin
+assets/img/projects/*
+!assets/img/projects/.gitkeep
+assets/img/hero/*
+!assets/img/hero/.gitkeep
+assets/img/team/*
+!assets/img/team/.gitkeep
+assets/img/portfolio/*
+!assets/img/portfolio/.gitkeep
+assets/img/about/*
+!assets/img/about/.gitkeep
+assets/img/services/*
+!assets/img/services/.gitkeep
+
+# IDE dan OS specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

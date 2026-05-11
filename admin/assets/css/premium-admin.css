@@ -1,0 +1,344 @@
+/* 
+   JSMP CORE UI FRAMEWORK v4.0
+   Standard: Scalable, Variable-Driven, Zero-Conflict Architecture
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
+
+:root {
+    /* --- 1. STRUCTURAL TOKENS (Fixed across themes) --- */
+    --jsmp-sidebar-width: 280px;
+    --jsmp-header-height: 80px;
+    --jsmp-radius-lg: 24px;
+    --jsmp-radius-md: 16px;
+    --jsmp-radius-sm: 8px;
+    --jsmp-spacing-lg: 40px;
+    --jsmp-spacing-md: 24px;
+    --jsmp-spacing-sm: 16px;
+    --jsmp-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* --- 2. THEME TOKENS - LIGHT (Default) --- */
+    --jsmp-bg-app: #f8fafc;
+    --jsmp-bg-surface: #ffffff;
+    --jsmp-bg-sidebar: #ffffff;
+    --jsmp-text-primary: #0f172a;
+    --jsmp-text-secondary: #64748b;
+    --jsmp-border: #e2e8f0;
+    --jsmp-accent: #d4af37;
+    --jsmp-accent-glow: rgba(212, 175, 55, 0.15);
+    --jsmp-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --jsmp-card-inner: none;
+}
+
+[data-theme="dark"] {
+    /* --- 3. THEME TOKENS - DARK --- */
+    --jsmp-bg-app: #020617;
+    --jsmp-bg-surface: #0f172a;
+    --jsmp-bg-sidebar: #020617;
+    --jsmp-text-primary: #f8fafc;
+    --jsmp-text-secondary: #94a3b8;
+    --jsmp-border: #1e293b;
+    --jsmp-accent: #f59e0b;
+    --jsmp-accent-glow: rgba(245, 158, 11, 0.2);
+    --jsmp-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    --jsmp-card-inner: inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* --- 4. CORE RESET & BASE --- */
+body {
+    background-color: var(--jsmp-bg-app) !important;
+    color: var(--jsmp-text-secondary) !important;
+    font-family: 'Inter', sans-serif !important;
+    margin: 0;
+    transition: var(--jsmp-transition);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--jsmp-text-primary) !important;
+    font-weight: 700;
+}
+
+/* Neutralizing Bootstrap Conflicts */
+.bg-white, .bg-light { background-color: var(--jsmp-bg-surface) !important; }
+.text-dark { color: var(--jsmp-text-primary) !important; }
+.border { border-color: var(--jsmp-border) !important; }
+
+/* --- 5. LAYOUT SYSTEM --- */
+/* --- 5. LAYOUT SYSTEM: SIDEBAR PREMIUM --- */
+.sidebar {
+    width: var(--jsmp-sidebar-width) !important;
+    background: var(--jsmp-bg-sidebar) !important;
+    border-right: 1px solid var(--jsmp-border) !important;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: var(--jsmp-transition);
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 3px;
+}
+
+.sidebar-brand {
+    height: var(--jsmp-header-height);
+    padding: 0 var(--jsmp-spacing-lg) !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--jsmp-border);
+    margin-bottom: 10px;
+}
+
+.sidebar-brand i {
+    font-size: 1.8rem;
+    color: var(--jsmp-accent);
+    filter: drop-shadow(0 0 8px var(--jsmp-accent-glow));
+}
+
+.sidebar-brand span {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: var(--jsmp-text-primary);
+}
+
+.nav-section-title {
+    padding: 24px var(--jsmp-spacing-lg) 8px !important;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--jsmp-text-secondary);
+    opacity: 0.5;
+}
+
+.nav-link {
+    padding: 12px var(--jsmp-spacing-lg) !important;
+    color: var(--jsmp-text-secondary) !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: var(--jsmp-transition);
+    border-left: 4px solid transparent;
+    margin: 2px 0;
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+    background: var(--jsmp-accent-glow) !important;
+    color: var(--jsmp-accent) !important;
+}
+
+.nav-link:hover i {
+    transform: translateX(3px);
+}
+
+.nav-link.active {
+    background: var(--jsmp-accent-glow) !important;
+    color: var(--jsmp-accent) !important;
+    border-left-color: var(--jsmp-accent);
+    background: linear-gradient(90deg, var(--jsmp-accent-glow) 0%, transparent 100%) !important;
+}
+
+.nav-link.text-danger:hover {
+    background: rgba(239, 68, 68, 0.05) !important;
+}
+
+.main-content {
+    margin-left: var(--jsmp-sidebar-width) !important;
+    padding: var(--jsmp-spacing-lg) 60px !important;
+    min-height: 100vh;
+    transition: var(--jsmp-transition);
+}
+
+/* --- 6. COMPONENT SYSTEM: CARDS --- */
+.card-premium {
+    background: var(--jsmp-bg-surface) !important;
+    border: 1px solid var(--jsmp-border) !important;
+    border-radius: var(--jsmp-radius-lg) !important;
+    box-shadow: var(--jsmp-card-inner), var(--jsmp-shadow) !important;
+    margin-bottom: var(--jsmp-spacing-md);
+    overflow: hidden;
+    transition: var(--jsmp-transition);
+}
+
+.card-header-premium {
+    padding: var(--jsmp-spacing-md) var(--jsmp-spacing-lg) !important;
+    border-bottom: 1px solid var(--jsmp-border) !important;
+    background: transparent !important;
+}
+
+.card-body-premium {
+    padding: var(--jsmp-spacing-lg) !important;
+}
+
+.card-footer-premium {
+    padding: var(--jsmp-spacing-md) var(--jsmp-spacing-lg) !important;
+    border-top: 1px solid var(--jsmp-border) !important;
+    background: rgba(0,0,0,0.02) !important;
+}
+[data-theme="dark"] .card-footer-premium { background: rgba(255,255,255,0.02) !important; }
+
+/* --- 7. COMPONENT SYSTEM: BUTTONS --- */
+.btn-premium {
+    padding: 12px 24px !important;
+    border-radius: var(--jsmp-radius-md) !important;
+    font-weight: 700 !important;
+    transition: var(--jsmp-transition) !important;
+    border: none !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-premium-primary {
+    background: var(--jsmp-accent) !important;
+    color: #000 !important;
+}
+
+.btn-premium:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+/* --- 8. COMPONENT SYSTEM: MODALS PREMIUM --- */
+.modal-content.card-premium {
+    border: none !important;
+    background: var(--jsmp-bg-surface) !important;
+}
+
+.modal-header-premium {
+    padding: var(--jsmp-spacing-md) var(--jsmp-spacing-lg) !important;
+    border-bottom: 1px solid var(--jsmp-border) !important;
+    background: rgba(0,0,0,0.02) !important;
+}
+[data-theme="dark"] .modal-header-premium { background: rgba(255,255,255,0.02) !important; }
+
+.modal-body-premium {
+    padding: var(--jsmp-spacing-lg) !important;
+}
+
+.modal-footer-premium {
+    padding: var(--jsmp-spacing-md) var(--jsmp-spacing-lg) !important;
+    border-top: 1px solid var(--jsmp-border) !important;
+    background: rgba(0,0,0,0.02) !important;
+}
+[data-theme="dark"] .modal-footer-premium { background: rgba(255,255,255,0.02) !important; }
+
+.modal-content .form-control, .modal-content .form-select {
+    background: var(--jsmp-bg-app) !important;
+    border: 1px solid var(--jsmp-border) !important;
+    color: var(--jsmp-text-primary) !important;
+    padding: 12px 16px !important;
+    border-radius: var(--jsmp-radius-md) !important;
+    transition: var(--jsmp-transition) !important;
+}
+
+.modal-content .form-control:focus, .modal-content .form-select:focus {
+    border-color: var(--jsmp-accent) !important;
+    box-shadow: 0 0 0 4px var(--jsmp-accent-glow) !important;
+}
+
+/* --- 9. COMPONENT SYSTEM: TABLES --- */
+.table-premium { color: var(--jsmp-text-primary) !important; }
+.table-premium thead th {
+    background: rgba(0,0,0,0.03) !important;
+    color: var(--jsmp-accent) !important;
+    font-weight: 800 !important;
+    padding: 18px var(--jsmp-spacing-lg) !important;
+    border: none !important;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+[data-theme="dark"] .table-premium thead th { background: rgba(255,255,255,0.03) !important; }
+
+.table-premium tbody td {
+    padding: 18px var(--jsmp-spacing-lg) !important;
+    border-bottom: 1px solid var(--jsmp-border) !important;
+}
+
+/* --- 9. UTILITIES & RESPONSIVE --- */
+.text-muted-custom { color: var(--jsmp-text-secondary) !important; }
+.x-small { font-size: 0.75rem !important; }
+.letter-spacing-1 { letter-spacing: 1px !important; }
+.letter-spacing-2 { letter-spacing: 2px !important; }
+
+@media (max-width: 992px) {
+    .sidebar { left: -100% !important; }
+    .main-content { margin-left: 0 !important; padding: var(--jsmp-spacing-md) !important; }
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--jsmp-bg-app); }
+::-webkit-scrollbar-thumb { background: var(--jsmp-border); border-radius: 10px; }
+
+/* --- 10. PREMIUM TOAST NOTIFICATIONS --- */
+.toast-container {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.premium-toast {
+    min-width: 320px;
+    background: var(--jsmp-bg-surface) !important;
+    border: 1px solid var(--jsmp-border) !important;
+    border-radius: var(--jsmp-radius-md) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+    padding: 16px 20px !important;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    backdrop-filter: blur(10px);
+    transform: translateX(120%);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.premium-toast.show {
+    transform: translateX(0);
+}
+
+.toast-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.toast-content {
+    flex-grow: 1;
+}
+
+.toast-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--jsmp-text-primary);
+    margin-bottom: 2px;
+}
+
+.toast-msg {
+    font-size: 0.8rem;
+    color: var(--jsmp-text-secondary);
+}
+
+/* Status Variants */
+.toast-success .toast-icon { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+.toast-error .toast-icon { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+.toast-warning .toast-icon { background: rgba(234, 179, 8, 0.1); color: #eab308; }
+.toast-info .toast-icon { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
